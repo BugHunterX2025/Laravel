@@ -7,7 +7,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-
 ## What is Laravel and Why Laravel?
 
 Laravel is a free, open-source PHP web framework, created by Taylor Otwell, intended for the development of web applications following the model–view–controller (MVC) architectural pattern. Laravel is a PHP framework that provides a robust set of tools for building web applications. It is known for its simplicity, flexibility, and scalability.
@@ -181,3 +180,17 @@ A Laravel project typically consists of the following directories and files:
 
 -   **WebPage URL**: Defines routes for your webpages.
 -   **APIs URL**: Defines routes for API endpoints.
+
+```mermaid
+graph TD
+   A["localhost/about"] --> B[Route Name about]
+    B --> C[hello.php View/Controller]
+
+    class A,B,C myStyle;
+
+    %% Adding CSS to style the nodes
+    style A fill:#f9f,stroke:#333,stroke-width:2px,rx:20px,ry:20px;
+    style B fill:#ccf,stroke:#333,stroke-width:2px,rx:20px,ry:20px;
+    style C fill:#cfc,stroke:#333,stroke-width:2px,rx:20px,ry:20px;
+
+```
