@@ -143,6 +143,15 @@ Some key features of Laravel include:
 
 ---
 
+# Essential VS Code Extensions for PHP & Laravel Development
+
+-   **PHP IntelliSense** by Damjan Cvetko ![icon](https://img.shields.io/badge/VS%20Code-IntelliSense-blue)
+-   **PHP Namespace Resolver** by Mehedi Hassan ![icon](https://img.shields.io/badge/VS%20Code-Resolver-blue)
+-   **Laravel Extra Intellisense** by Amir ![icon](https://img.shields.io/badge/VS%20Code-Laravel%20IntelliSense-blue)
+-   **Laravel Blade** by Christian Howe ![icon](https://img.shields.io/badge/VS%20Code-Blade%20Support-blue)
+-   **Laravel Blade Snippets** by Winnie Lin ![icon](https://img.shields.io/badge/VS%20Code-Blade%20Snippets-blue)
+-   **Laravel Go To View** by Codingyu ![icon](https://img.shields.io/badge/VS%20Code-Go%20To%20View-blue)
+
 ## Laravel Project Structure
 
 A Laravel project typically consists of the following directories and files:
