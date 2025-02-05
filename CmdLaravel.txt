@@ -1,0 +1,35 @@
+-------------------------------Laravel All Cmd  --------------------------------
+1.Gloabl installation =>
+`composer gloabl require laravel/insaller`
+2.create new project
+`composer create-project --prefer-dist laravel/laravel project-name`
+3. Install dependencies
+`composer install`
+4. Install Node.js dependencies
+`npm install`
+5. Install Node.js dependencies
+`npm install --production`
+6. Run migrations
+`php artisan migrate`
+7. Run seeders
+`php artisan db:seed`
+8. Run the application
+`php artisan serve`
+9. Run the application in debug mode
+`php artisan serve --env=local`
+10. Run the application in production mode
+php
+artisan serve --env=production
+11. Run the application in development mode
+php
+artisan serve --env=development
+12. Run the application in testing mode
+php
+artisan serve --env=testing
+13. Run the application in watch mode
+php
+artisan serve --watch
+14. Run the application in watch mode with debug mode
+php
+artisan serve --watch --env=local
+
