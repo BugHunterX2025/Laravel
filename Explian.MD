@@ -335,3 +335,152 @@ In your `welcome.blade.php` view (or any other Blade file), you can use an ancho
 <h1>This is the home page</h1>
 <a href="/post">Post Page</a>
 ```
+
+# Laravel Sub-Route Setup
+
+## Overview
+
+This guide explains how to set up sub-routes in a Laravel application using `Route::view` and `Route::get` methods.
+
+## Steps to Create Sub-Routes
+
+### 1. Define a Main Route
+
+```php
+Route::view('post', '/post');
+```
+
+### 2. Define a Sub-Route
+
+```php
+Route::get('/post/firstpost', function () {
+    return view('firstpost');
+});
+```
+
+#### Notes
+
+-   Use `Route::view('route', 'view')` for simple static pages.
+-   Use `Route::get()` with a closure when you need logic before returning a view.
+-   Ensure that corresponding Blade templates exist to prevent errors.
+
+# Route Parameters in Laravel
+
+In Laravel, when you define routes, you can use parameters in the URL to get dynamic data. These are called **Route Parameters**.
+
+## 1. Basic Example
+
+**URL**: `http://localhost/post/10`
+
+The `{id}` part in the route will match `10` in the URL. In the example, you can use that `10` value inside your route as `$id`.
+
+```php
+Route::get('/post/{id}', function(string $id) {
+    return 'user' . $id;  // Will display "user10"
+});
+```
+
+### 2. Optional Parameters
+
+You can also create routes with optional parameters.
+
+**URL**: `http://localhost/post`
+
+If no parameter is provided in the URL, it will use `'default'` as the value for `$id`.
+
+```php
+Route::get('/post/{id?}', function($id = 'default') {
+    return 'Post ID is: ' . $id;
+});
+
+```
+
+### 3. Using Special Characters (@)
+
+When working with URLs that contain special characters, such as `@`, Laravel can still interpret them as part of the route parameters.
+
+**Example:**
+
+If you need to match a value like `@john` in the route, you can use the following code:
+
+```php
+Route::get('/post/{name}', function($name) {
+    return 'Hello, ' . $name;  // Will display "Hello, @john"
+});
+```
+
+# Strict Parameter Rules with `where` in Laravel
+
+Laravel allows you to enforce rules on route parameters. These are used to ensure that parameters match certain patterns or criteria.
+
+### 1. `whereNumber` (only accepts numbers)
+
+```php
+Route::get('/post/{id}', function ($id) {
+    return "This is post id: $id";
+})->whereNumber('id');
+```
+
+### 2. `whereAlpha` (only accepts letters)
+
+```php
+Route::get('/post/{id}', function ($id) {
+    return "This is post id: $id";
+})->whereAlpha('id');
+```
+
+### 3. `whereAlphaNum` (only accepts alphanumeric characters)
+
+```php
+Route::get('/post/{id}', function ($id) {
+    return "This is post id: $id";
+})->whereAlphaNumeric('id');
+```
+
+### 4. Custom Pattern Matching with `where`
+
+You can also use custom regular expressions for more advanced constraints.
+
+````php
+Route::get('/post/{id}', function ($id) {
+    return "This is post id: $id";
+})->where('id', '\d{4}-\d{2}-\d{2}');  // Accepts date format like YYYY-MM-DD
+### 5. `whereIn` and `whereNotIn`
+
+#### `whereIn` (accepts values from a specific set)
+
+```php
+Route::get('/post/{id}', function ($id) {
+    return "This is post id: $id";
+})->whereIn('id', [1, 2, 3]);
+````
+
+### 6. `whereBetween` and `whereNotBetween`
+
+#### `whereBetween` (accepts values within a specified range)
+
+```php
+Route::get('/post/{id}', function ($id) {
+    return "This is post id: $id";
+})->whereBetween('id', [1, 5]);
+```
+
+### 7. `whereNull` and `whereNotNull`
+
+#### `whereNull` (only accepts null)
+
+```php
+Route::get('/post/{id}', function ($id) {
+    return "This is post id: $id";
+})->whereNull('id');
+```
+
+### 8. Combining Multiple Constraints
+
+You can apply multiple constraints to different parameters in a single route:
+
+```php
+Route::get('/post/{id}/{name}', function ($id, $name) {
+    return "This is post id: $id and name: $name";
+})->where('id', '[0-9]+')->where('name', '[a-zA-Z]+');
+```
