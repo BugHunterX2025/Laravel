@@ -32,4 +32,19 @@ artisan serve --watch
 14. Run the application in watch mode with debug mode
 php
 artisan serve --watch --env=local
-
+15.show list of artisan Cmd
+=> php artisan
+16.list of cmd for route
+==>php artisan route -h
+17.for remove caching
+php artisan cache:clear
+18.for remove view caching
+php artisan view:clear
+19.for list of route
+php artisan route:list
+20.for list of except vendor
+php artisan route:list --except-vendor
+21. for perticuler method route
+php artisan route:list --method=GET
+22.for perticuler route name
+php artisan route:list --path='nameofroutelike'
