@@ -592,3 +592,25 @@ Route::prefix('admin')->name('admin.')->group(function () {
     })->name('dashboard'); // Now it's 'admin.dashboard'
 });
 ```
+
+# Fallback Route in Laravel
+
+A fallback route in Laravel is used to handle requests that don't match any of the defined routes in your application. It's a catch-all route that helps you define custom behavior when a user requests a URL that doesn't exist.
+
+## Key Points:
+
+-   **Purpose**: The fallback route helps to display a 404 page, redirect users, or show a custom error message.
+-   **Syntax**: It's defined using the `Route::fallback()` method.
+-   **Location**: The fallback route should be defined at the bottom of your routes file, after all other routes.
+
+## Example:
+
+### 1. Define a Fallback Route:
+
+You can create a fallback route in the `routes/web.php` file:
+
+```php
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404); // Custom 404 page
+});
+```
