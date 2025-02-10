@@ -484,3 +484,20 @@ Route::get('/post/{id}/{name}', function ($id, $name) {
     return "This is post id: $id and name: $name";
 })->where('id', '[0-9]+')->where('name', '[a-zA-Z]+');
 ```
+
+### 9. Using `where` with `controller` and `action` Methods
+
+You can use the `where` method with controller and action methods to apply constraints to the route parameters
+php
+Route::get('/post/{id}', 'PostController@get')->where('id', '[0
+-9]+');
+
+# Named Routes in Laravel
+
+## Introduction
+
+In Laravel, named routes are a way to give a name to a route, which can be used
+to generate URLs and redirects. This is useful for creating links to routes
+from within your application.
+
+## Creating a Named Route
