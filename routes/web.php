@@ -92,3 +92,32 @@ Route::get('/', function () {
 // })->where('id', '[0-9]+')->where('name', '[a-zA-Z]+');
 
 // name routess
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('/posts', function () {
+    return view('post');
+})->name('mypost');
+Route::get('/about', function () {
+    return view('firstpost');
+});
+
+route::get('/test', function () {
+    return view('firstpost');
+});
+Route::redirect('/posts', '/test', 301);
+// Route::permanentRedirect('/post', '/test', 301);
+
+//larvel route groups
+Route::prefix('page')->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::get('/about', function () {
+        return view('firstpost');
+    });
+});
+
+route::fallback(function () {
+    return "<h1>not found ok";
+});
