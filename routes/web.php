@@ -90,3 +90,5 @@ Route::get('/', function () {
 // ) {
 //     return "This is post id: $id and name: $name";
 // })->where('id', '[0-9]+')->where('name', '[a-zA-Z]+');
+
+// name routess
