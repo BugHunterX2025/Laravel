@@ -500,4 +500,95 @@ In Laravel, named routes are a way to give a name to a route, which can be used
 to generate URLs and redirects. This is useful for creating links to routes
 from within your application.
 
-## Creating a Named Route
+## Example:
+
+### 1. Define a Named Route
+
+```php
+Route::get('/home', function () {
+    return view('home');
+})->name('home'); // This is a named route
+```
+
+### 2. Use Named Route in Views (Blade)
+
+In your Blade templates, you can use the `route()` helper function to generate the URL:
+
+```php
+<a href="{{ route('home') }}">Go to Home</a>
+```
+
+### 3. Use Named Route in Controller or Redirection
+
+You can also use the route name in controllers or when redirecting users:
+
+```php
+// Redirecting to a named route
+return redirect()->route('home');
+```
+
+## Example of Changing the URL:
+
+If you change the URL from `/home` to `/dashboard`, you only need to change the route definition:
+
+```php
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('home'); // Now it’s still the 'home' route
+```
+
+# Group Named Routes in Laravel
+
+In Laravel, you can group routes together and assign them a shared name prefix or namespace, which can be helpful in managing related routes. Grouping named routes helps keep your application organized and simplifies route definitions.
+
+## Key Points:
+
+1. **Route Groups**: You can define routes inside a group with shared properties like middleware, prefixes, or names.
+2. **Named Route Prefix**: You can assign a prefix to a group of routes, which will be applied to all routes in that group.
+3. **Route Caching**: Grouping routes allows Laravel to optimize your routing, which improves performance.
+
+## Example:
+
+### 1. Define Grouped Routes with a Name Prefix
+
+You can group routes and apply a shared name prefix using `name()` within a `Route::group`:
+
+````php
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard'); // Named route 'admin.dashboard'
+
+    Route::get('/users', function () {
+        return view('admin.users');
+    })->name('users'); // Named route 'admin.users'
+});
+
+### 2. Use Grouped Named Routes
+
+In your Blade templates or controllers, you can use the full name of the route with the prefix:
+
+```php
+<a href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
+````
+
+### 3. Use Grouped Routes in Redirection
+
+You can also refer to the grouped named route in a controller when redirecting:
+
+```php
+// Redirecting to a grouped named route
+return redirect()->route('admin.dashboard');
+```
+
+### Example of Changing Group URL:
+
+If you want to change the URL from `/admin/dashboard` to `/admin/home`, you only need to modify the route inside the group:
+
+```php
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/home', function () {
+        return view('admin.home');
+    })->name('dashboard'); // Now it's 'admin.dashboard'
+});
+```
