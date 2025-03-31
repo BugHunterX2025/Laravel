@@ -121,3 +121,7 @@ Route::prefix('page')->group(function () {
 route::fallback(function () {
     return "<h1>not found ok";
 });
+
+route::get('/', function () {
+    return view('bladetempexm');
+});
