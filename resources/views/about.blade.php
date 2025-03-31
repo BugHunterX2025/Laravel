@@ -1,7 +1,13 @@
-@include('pages.header')
-<article>
-        <h1>About Page</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo tenetur, nam dignissimos temporibus pariatur quo nisi quod voluptatum magnam eaque fugiat sed minima corrupti itaque repellat iure provident quaerat, ad at ullam reprehenderit eveniet ducimus a! Dolor aperiam ut at ab perspiciatis itaque voluptatem, vel quod earum numquam sapiente est!</p>
-    </article>
-   @include('pages.sidebar')
-    @include('pages.footer')
+@extends('layout.masterlayout')
+@section('content')
+<h1>This About Page</h1>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quasi nam eius inventore sunt, in aliquid blanditiis fugiat ducimus ab repellendus vel quis laboriosam alias est sint expedita nulla, voluptas odio dolor eos repudiandae iusto iure doloribus! Error sit recusandae optio omnis harum doloremque illum, explicabo quia nisi iure sequi aliquid qui?</p>
+@endsection
+@section('content')
+<h1>This About Page</h1>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quasi nam eius inventore sunt, in aliquid blanditiis fugiat ducimus ab repellendus vel quis laboriosam alias est sint expedita nulla, voluptas odio dolor eos repudiandae iusto iure doloribus! Error sit recusandae optio omnis harum doloremque illum, explicabo quia nisi iure sequi aliquid qui?</p>
+@endsection
+{{-- no show diffent if muliple section --}}
+@section('title')
+    About
+@endsection

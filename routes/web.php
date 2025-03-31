@@ -131,7 +131,7 @@ Route::get('/', function () {
 // });
 
 route::get('/', function () {
-    return view('maintemp');
+    return view('mainview');
 });
 
 route::get('/about', function () {
