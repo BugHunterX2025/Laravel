@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\TestingController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 // Route::get('/post', function () {
 //     // return view('post');
 //     return "<h1>Direct define</h1>";
@@ -92,32 +94,46 @@ Route::get('/', function () {
 // })->where('id', '[0-9]+')->where('name', '[a-zA-Z]+');
 
 // name routess
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/posts', function () {
-    return view('post');
-})->name('mypost');
-Route::get('/about', function () {
-    return view('firstpost');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::get('/posts', function () {
+//     return view('post');
+// })->name('mypost');
+// Route::get('/about', function () {
+//     return view('firstpost');
+// });
+
+// route::get('/test', function () {
+//     return view('firstpost');
+// });
+// Route::redirect('/posts', '/test', 301);
+// // Route::permanentRedirect('/post', '/test', 301);
+
+// //larvel route groups
+// Route::prefix('page')->group(function () {
+//     Route::get('/', function () {
+//         return view('welcome');
+//     });
+//     Route::get('/about', function () {
+//         return view('firstpost');
+//     });
+// });
+
+// route::fallback(function () {
+//     return "<h1>not found ok";
+// });
+// -----------------------------------------------------------------
+
+route::controller(PageController::class)->group(function () {
+    route::get('/',  'showHome')->name('home');
+    route::get('/blog', 'showBlog')->name('blog');
+
+    route::get('/user/{id}', 'showUser')->name('user');
 });
 
-route::get('/test', function () {
-    return view('firstpost');
-});
-Route::redirect('/posts', '/test', 301);
-// Route::permanentRedirect('/post', '/test', 301);
+// route::get('/', [PageController::class, 'showHome'])->name('home');
+// route::get('/blog', [PageController::class, 'showBlog'])->name('blog');
 
-//larvel route groups
-Route::prefix('page')->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-    Route::get('/about', function () {
-        return view('firstpost');
-    });
-});
-
-route::fallback(function () {
-    return "<h1>not found ok";
-});
+// route::get('/user/{id}', [PageController::class, 'showUser'])->name('user');
+route::get('/test', TestingController::class);

@@ -1,0 +1,37 @@
+user->controller->model->model->controller->view->user
+
+1->Create Controller File
+    => php artisan make:controller UserController
+2->Create Controller Class
+    => class UserController extends controller
+    {
+
+     public functioin show()
+     {
+        return view('user.profile');
+     }   
+    }
+3->Create Route
+use App\Http\Controllers\UserController;
+Route::get('/user', [UserController::class, 'show']);
+
+
+Single Action Controller
+=====================================
+class TestController extends Controller{
+    public function _invoke()
+    {
+        return view('test');
+    }
+}
+
+Route::get('/test',TestController::class);
+this is when single page controller like test 
+
+for makeing this is commands is php artisan make:controller TesttingContrroller --invokable
+or --i
+
+Some cmd For Controller
+=====================================
+php artisan route:list --except-vendor
+php artisan route:list --path-user

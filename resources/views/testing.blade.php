@@ -1,0 +1,1 @@
+<h2>this single action contoller</h2>
