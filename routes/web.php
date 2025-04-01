@@ -140,3 +140,7 @@ route::get('/about', function () {
 route::get('/post', function () {
     return view('post');
 });
+
+route::get('/test', function () {
+    return view('test');
+});

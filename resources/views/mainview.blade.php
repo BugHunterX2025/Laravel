@@ -6,3 +6,10 @@
 @section('title')
     Home
 @endsection
+@prepend('style')
+<style>
+#wrapper {
+    background-color: teal;
+}
+</style>
+@endprepend

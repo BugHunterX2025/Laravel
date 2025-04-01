@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document- @yield('title' ,'website')</title>
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    @stack('style')
 </head>
 <body>
     <div id="wrapper">
@@ -40,6 +41,7 @@
         </main>
         <footer>saurabh@larvel.com</footer>
         </div>
+        @stack('script')
         </body>
         </html>
          

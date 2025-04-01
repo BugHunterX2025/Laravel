@@ -12,3 +12,7 @@
 <p>This is the sidebar</p>
     
 @endsection
+@push('script')
+<script src="./ex.js"></script>
+    
+@endpush
