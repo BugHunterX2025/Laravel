@@ -1,0 +1,34 @@
+@extends('layout.masterlayout')
+@section('content')
+<h1>This About Page</h1>
+@verbatim
+<div id="app">{{ message }}</div>
+@endverbatim
+{{-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quasi nam eius inventore sunt, in aliquid blanditiis fugiat ducimus ab repellendus vel quis laboriosam alias est sint expedita nulla, voluptas odio dolor eos repudiandae iusto iure doloribus! Error sit recusandae optio omnis harum doloremque illum, explicabo quia nisi iure sequi aliquid qui?</p> --}}
+@endsection
+{{-- @section('content')
+<h1>This About Page</h1>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quasi nam eius inventore sunt, in aliquid blanditiis fugiat ducimus ab repellendus vel quis laboriosam alias est sint expedita nulla, voluptas odio dolor eos repudiandae iusto iure doloribus! Error sit recusandae optio omnis harum doloremque illum, explicabo quia nisi iure sequi aliquid qui?</p>
+@endsection --}}
+{{-- no show diffent if muliple section --}}
+@section('title')
+    About
+@endsection
+
+@push('script')
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
+<script>
+  const { createApp, ref } = Vue
+
+  createApp({
+    setup() {
+      const message = ref('Hello vue!')
+      return {
+        message
+      }
+    }
+  }).mount('#app')
+</script>
+@endpush

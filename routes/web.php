@@ -102,22 +102,48 @@ Route::get('/about', function () {
     return view('firstpost');
 });
 
-route::get('/test', function () {
-    return view('firstpost');
-});
-Route::redirect('/posts', '/test', 301);
-// Route::permanentRedirect('/post', '/test', 301);
+// route::get('/test', function () {
+//     return view('firstpost');
+// });
+// Route::redirect('/posts', '/test', 301);
+// // Route::permanentRedirect('/post', '/test', 301);
 
-//larvel route groups
-Route::prefix('page')->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-    Route::get('/about', function () {
-        return view('firstpost');
-    });
-});
+// //larvel route groups
+// Route::prefix('page')->group(function () {
+//     Route::get('/', function () {
+//         return view('welcome');
+//     });
+//     Route::get('/about', function () {
+//         return view('firstpost');
+//     });
+// });
 
-route::fallback(function () {
-    return "<h1>not found ok";
+// route::fallback(function () {
+//     return "<h1>not found ok";
+// });
+
+function getUsers()
+{
+    return   [
+        1 => ['name' => 'saurabh', 'phone' => '8171995707'],
+        2 => ['name' => 'archi', 'phone' => '8171995707'],
+    ];
+};
+route::get('/users', function () {
+    // $name = "saurabh";
+    $names = getUsers();
+    return view('users', ['user' => $names]);
+    // return view('users', ['user' => $name, 'city' => 'Dehli', 'script' => '<script>alert("this");</script>']);
+    // return view('users')->with('user', $name)->with('city', 'dehli');
+    // return view('users')->withUser($name)->withCity('Dehli');
+
 });
+route::get('/user/{id}', function ($id) {
+    $users = getUsers();
+    abort_if(!isset($users[$id]), 404);
+    $user = $users[$id]; //find id passby route
+
+    return view('user', ['id' => $user]);
+
+    // return "<h1>User:" . $id . "</h1>";
+})->name('view.user');
