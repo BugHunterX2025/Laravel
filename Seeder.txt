@@ -1,0 +1,45 @@
+* Seeding
+    Insert Initial Data In Tables
+
+       Seeding
+        /    \
+    Seeder  Factory
+       |       | 
+  Real Data  Fake Data 
+
+===========================================
+**php artisan  make:model Student
+**php artisan make:seeder StudentSeeder
+use App\Models\Student
+class StudentSeeder extends Seeder
+{
+    public function run():void
+    {
+       Student::create([
+        'name' => 'John'
+       ])
+    }
+}
+Seeders/DatabaseSeeder.php
+$this->call([
+    StudentSeeder::class;
+])
+php artisan db:seed
+php artisan db:seed --class=UserSeeder
+
+* If We Use Craete Table Migration then  Student::create([
+                'name' => $student->name,
+                'email' => $student->email,
+            ]); here create timestamo are used
+* For ex 
+ $students->each(function ($student) {
+        Student::create([
+            'name' => $student->name,
+            'email' => $student->email,
+        ]);
+    });
+* Php Faker For Fake Data
+ Student::create([
+            'name' => fake()->name,
+            'email' =>fake()->email,
+        ]);
