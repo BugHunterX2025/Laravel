@@ -1,0 +1,107 @@
+Steps For to work in model
+1. Create Database
+2.Create Database Migeration
+
+3.seeding
+4.create model
+
+---------databse file-------
+confiq-->database.php--->default mysql
+=================================================
+2. Crate Database Migeration
+php artisan make:migration create_students_table
+
+return new class extends migration
+{
+
+    public functioin up():void
+    {
+      Schema::create('students',function(blueprint $table){
+        $table->id();
+      })   
+    }
+}
+php artisan migrate
+
+up() for make new 
+down() for delete or reverse rollback 
+
+all datatype define in blurprint .php
+
+php artisan Migrate:status
+
+php artisan migrate --force (force migrate)
+
+---------for migration rollback/undo--------
+php artisan migrate:rollback  --> it rollback last make migration
+it is romve for db but not in file sytem u again check status it is show pending 
+when u again migrtae it migrate 
+
+php artisan migrate:rollback --step=3
+php artisan migrate:rollback --batch=3 ("10migration particuler 3")
+
+php artisan migrate:reset
+php artisan migrate:refresh(rollback,migrate)
+php artisan migrate:fresh
+
+php artisan make:model Task -m
+=================================================
+Modification with migration
+* Coloum Modification
+    => Add new Coloum
+        ---> php artisan make:migration update_students_table --table=students
+    
+    => Delete Coloum
+        ->>> $table->dropcolumn(['city','avatar'])
+    => Modify Coloum type
+    => Rename Coloum
+        --> $table->rename('from','to')=>msql<8.0.3 ,mairadb <10.5.2
+    => Size Of Coloum,order
+        --> $table->string('name','50')->change()
+        --> $table->integer('votes')->unsigned()->default(1)->comment('this')->change();
+    => chage order
+    $table->after('password',functioin(bludprint $table){
+        $table->string('name','50');
+    })
+* Table Modification
+    => Rename Table
+    --> $table->rename('from','to')
+    => Delete Table
+    --> $table->drop('users')
+    ->Schema::dropIfExists('users');
+    if(Schema::hasTable('users'))
+    {
+
+    }
+    if(Schema::hasColoum('users','email'))
+    {
+
+    }
+
+===================================================================
+* Table Constraints
+Like Not Null ->nullable(); ,Unique ->Unique();,primary key->primary('user_id');
+$table->foregin('user_id')->refrence('id')->on('useer');
+DB::statment('alter table users add Constraint agen check (age >18))
+====================================================================
+* Forgin key
+--> $table->foregin('user_id')->refrence('id')->on('users');
+    => $table->foregin('user_id')->Constraint('students')
+    => $table-.unsignedBigInteger('student_id');
+--> Foregin Key with Cascade\
+--> $table->foregin('user_id')->refrence('id')->on('users')->onDelete->onUpdate
+-->onDelete('set null')
+-->onDelete('cascade')
+-->onDelete('restrict')
+-->cascadeOnDelete
+-->cascadeOnUpdate
+-->nullOnDelete()
+-->nullOnUpdate()
+
+====================================================================
+* Drop Constraint
+--> $table->drop('users')
+--> $table->dropPrimary('users_id_primary')
+--> $table->dropUnique('users_email_unique)
+--> $table->dropForeign(['user_id'])
+====================================================================
