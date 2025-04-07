@@ -1,0 +1,104 @@
+            *Create Model
+            ( Sql Commands)
+                /    \
+     Query Bulider   Eloquent QRM
+            |
+        Controller
+    
+
+                Query Bulider
+                /    |   \   \
+        Create    Read  UPDATE  Delete
+
+* It protects your application from sql injection by using pdo parameter binding.        
+
+* php artisan make:Controller UserController
+
+use llluminate\Support\Facades\DB;
+class UserController extends Controller
+{
+    public function show()
+    {
+        $users = DB::table('users')->get();
+        return $users;
+    }
+}
+
+* Route::get('/user',[UserController::class],'show');
+
+Select name,city form users;
+DB::table('users')->select('name','city')->get();
+
+Select *From users where city='goa';
+DB::table('users')->where('city','=','goa')->get();
+
+* $user =DB::table('users')->select('name','email')->distinct()->get();
+* $user= DB::table('users')->pluck('name');
+* $user= DB::table('users)->where('city','goa')->get();
+* $user= DB::table('users')->where('city','goa')->first();
+* $user= DB::table('users')->where('name' ,'like','%John%')->get();
+* $user= DB::table('users')->where([
+    ['name','like','%John%'],
+    ['city','like','%goa%'],
+])->get();
+* $user= DB::table('users')->where('name','like','%John%')->orWhere(
+    'city','like','%goa%')->get();
+
+* $user= DB::table('users')->whereBetween('id',[3,6])->get();
+* whereNotIn
+* whereNull
+* whereNotNull
+* whereYear
+* whereMonth
+* whereDay
+* whereTime
+* whereBetween
+* whereNotBetween
+
+**** Determine If Record Exist
+* $user= DB::table('users')->where('name','John')->exists();
+
+* Limit / offset --> is replace like take and skip
+* count
+
+=================================================================================================
+* Insert
+
+DB::table('users')->insert([
+    'name'=>'John',
+    'email'=>'john@gmail.com',
+]);
+InsertOrIngore("ignore duplicate entry");
+* UPDATE
+DB::table('users')->where('id',1)->update([
+    'name'=>'John'
+])
+
+* Delete
+DB::table('users')->where('id',1)->delete();
+
+*Upsert
+DB::table('users')->upsert([
+    'name'=>'John',
+    'email'=>'john@gmail.com',
+],['email']);
+* First Check it is already have or not if it is not presnt insert outwise update
+* InsertGetId() it is insert and give is id 
+* UpdateorInsert -> it is update or insert mean if is exists update or insert new
+DB::table('users')->UpdateorInsert([
+    'name'=>'John',
+    'email'=>'john@gmail.com',
+],[
+    'id'=>1
+])
+
+*Increment
+DB::table('users')->where('id',1)->increment('age',1,['city'=>'bareilly']);
+* Decrement
+DB::table('users')->where('id',1)->decrement('age',1);
+*IncrementEach
+DB::table('users')->where('id',1)->IncrementEach([
+    'age' => 1,
+    'salary' => 1000,
+    ]);
+])
