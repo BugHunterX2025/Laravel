@@ -8,6 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 
 </head>
+<style>
+    nav .w-5{
+        display: none;
+    }
+</style>
 <body>
     <div class="container">
         <div class="row">
@@ -38,7 +43,16 @@
                 </tr>
                    @endforeach
                 </table>
+                <div class="mt-5">
+                    {{ $data->links('pagination::bootstrap-5') }}
+                </div>
+                <div class="">
+                    Total User : {{$data->total()}}
+                    Total Current Page : {{$data->currentPage()}}
+
+                </div>
             </div>
+            
         </div>
     </div>
 </body>

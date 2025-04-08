@@ -11,7 +11,9 @@ class employeController extends Controller
     //
     public function showUser()
     {
-        $employe =   DB::table('employes')->whereDate('created_at', '2025-04-07')->orderBy('name')->get();
+        // $employe =   DB::table('employes')->whereDate('created_at', '2025-04-07')->orderBy('name')->get();
+        $employe = DB::table('employes')->Paginate(3, ['*'], 'p')->appends(['sort' => 'vote']);
+
         // $employe =   DB::table('employes')->find(2);
 
         // return $employe;

@@ -1,0 +1,27 @@
+*Pagination =>
+    Larvel Have inbulid concept so in larvel have 3 methods
+    1. paginate()
+        => Controller->DB::table('users')->paginate(5);
+        < 1 2 3 >
+    2. simplePaginate()
+    => Controller->DB::table('users')->simplePaginate(5);
+    => By Defualt 15 Record
+    => < >
+    3. cursorPaginate()
+    => Controller->DB::table('users')->orderBy('id')->cursorPaginate(5);
+    => It Is used index
+* Blade File
+    {{$data->links()}}
+it is used tailwind css
+When Used Bootstrap then u define appserviceprovide.php function for 
+Bootstrap pagination
+<div class="mt-5">
+                {{ $data->links('pagination::bootstrap-5') }}
+            </div>
+***bootstrap-5.Blade.php
+* paginate(4,['name','p',2]) here not show name col
+here p is page 
+here append data also append(['store'=>'vote'])
+here use also fragment('users') set it Defualt 
+* Pagination in Laravel Awarnes Method On Website like
+total() in blade 
