@@ -1,0 +1,32 @@
+* JOIN =>
+    "Select * From studnets inner join cities
+    on studnets.city = cities.city"
+    DB::table('studnets)->join('cities','studnets.city','=','cities.cid')->get();
+
+    Join -> join(),leftjoin(),rightjoin(),crossjoin()
+    ->count();
+    ->Select(DB::raw('count(*) as student_count),'age')->groupby('age)->orderBy('student_count','DESC
+    ')->having('city.city_name','=','goa');
+->leftjoin('city',function(
+    $join->on('studnet.city','=','cities.id')
+))
+->select('studnet.name','studnet.age','cities.city_name')
+
+====================================================================================
+** Union =>
+    1.UnionAll()=>
+        $studnet=DB::table('student);
+        $lecture=DB::table('lecture')->Union($student);
+        tosql for check sql query
+
+** When () =>
+    if(condition)
+    {
+
+    }
+    DB::table('student)->When(true,function($query){
+        $query->where('cities',=,'goa')
+    })->get();
+
+========================================================================
+** Chunk()Method
