@@ -1,0 +1,15 @@
+Raw Query =>
+    ---DB:select('select * from user');
+    --DB:select('select * from user where id= ? ,[2]);
+    --DB:insert('insert into student (name,age)value(?,?),['ram',20])
+    --DB:update('update users set email ='saaurabh@sheelinfotech' where id=?',['2'])
+    --DB:delete('delete form user where id=?',[2]);
+
+Statment =>
+    -- Statment('drop table student');
+    -> UnPrepared
+        => DB:UnPrepared('delete from stuednet where id=5")
+
+Raw Methode For Query Bulider=>
+    Db:table('users')->select('name','age')->get();
+    db:table('users)->selectRaw('name,age')->get();

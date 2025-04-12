@@ -17,10 +17,15 @@ class StudentController extends Controller
         //     ->where('student.name', '=', 'John Doe')
 
         //     ->get();
-        $students = DB::table('student')
-            ->leftJoin('city', 'student.city_id', '=', 'city.city_id')->get();
-        return $students;
+        // $students = DB::table('student')
+        //     ->leftJoin('city', 'student.city_id', '=', 'city.city_id')->get();
+        // return $students;
         // return view('student', ['data' => $students]);
+        // $students = DB::select('select * from student where student_id= ?', ['1']);
+        // $students = DB::insert("insert into student(name,email)values (?,?)", ['sAU', 'prideepsingh@gmail.com']);
+        // $students = DB::insert("update student set email =? where student_id=?", ['pride@gmail.com', '3']);
+        $students = DB::delete("delete from student where student_id=?", ['3']);
+        return $students;
     }
     public function uniondata()
     {
@@ -50,13 +55,13 @@ class StudentController extends Controller
             }
             echo "</div>";
         });
-        $students = DB::table('student')->orderBy('student_id')->chunk(2, function ($students) {
-            echo "<div style='border:1px solid red;margin-bottom:5px'>";
+        // $students = DB::table('student')->orderBy('student_id')->chunk(2, function ($students) {
+        //     echo "<div style='border:1px solid red;margin-bottom:5px'>";
 
-            foreach ($students as $set) {
-                DB::table('student')->where('id', $set->id);
-            }
-            echo "</div>";
-        });
+        //     foreach ($students as $set) {
+        //         DB::table('student')->where('id', $set->id);
+        //     }
+        //     echo "</div>";
+        // });
     }
 }
