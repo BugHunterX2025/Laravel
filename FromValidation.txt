@@ -1,0 +1,168 @@
+***Form Validation
+    => public function show(Request $req)
+    {
+        $validatedData = $req->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+        ]
+    }
+    * Here req get all data of form after submit form 
+    * return $req->all() (get all form data)
+    * Super Global Varibale For Show Validate Error
+    @php
+    print_r($errors->all())
+    @endphp
+    * Validation.php file =>vendor>src>translation>lang>validation.php
+    *   @error('name')
+            {{$message}}
+        @enderror
+    <input type="text" name="name" id="" class="form-control @error('name')
+                            is-invalid
+                        @enderror   ">
+                        <span class="text-danger">
+                            @error('name')
+                                {{$message}}
+                            @enderror
+                        </span>
+    * Old Value After Not Submit value="{{old('name')}}"
+    * 'age' => 'required|numeric|min:18|max:25'
+    * between:18,27
+    * change the attribute text 
+        -> attribute=>[
+            'name'=>'Name',
+        ]
+    * Custom message
+        =>  'custom' => [
+        'attribute-name' => [
+            'rule-name' => 'custom-message',
+        ],
+    ],
+            => For ex
+                =>'custom' => [
+        'email' => [
+            'required' => 'Email id is must',
+        ],
+    ],
+     ** This is above way for all page where same varible are used
+     ** For the perticuler page pass in array from using array [
+        'email.required'=>'useremail is requried'
+     ] 
+
+================================================================================================
+* Another Way To define All Form Request Validation
+    php artisan make:request userRequest
+class UserRequest extends FormRequest
+{
+    public function rules()
+    {
+        return [
+            'name' => 'required',
+            'email' => 'required|email',
+        ]
+    }
+}
+//app//http/Requestts
+**
+/**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+class UserRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'name' => 'required',
+            'email' => 'required|email',
+            'age' => 'required|numeric|between:18,27',
+            'password' => 'required|alpha_num|min:6'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Name is required'
+        ];
+    }
+}
+**** :attribute is requried but here attribute use name varibale
+
+** public function attribute()
+{
+    return[
+        'name' => 'User Name'
+    ]
+}
+
+*****Prepared For Form Validation
+protected function prepareForValidation():void
+{
+
+}
+
+**     protected $stopOnFirstFailure = true;
+===========================================================
+** Request handing method
+    -> $req->all();
+    -> $req->only(['name','email']);
+    -> $req->except(['name','email']);
+=============================================================
+** Custom Validate Rules
+            /          \
+    Using Rule Object  Use Closure
+        |                       |
+Can Use Many time in     can use one time in 
+a website                 website
+
+** Rule Object
+    php artisan make:rule UpperCase
+    class uppercase implements ValidationRule
+    {
+ public function validate(string $attribute, mixed $value, Closure $fail): void
+    {
+        //
+    }
+    }
+    app/Rules/UpperCase.php
+    --> Here have 3 method attribute ,mixed value ,Closure $fail
+    --> Closure fail method work rule are failed
+    --> How use in controller file
+        --> Use APP\Rules\uppercase;
+        public function addUser(Request $req)
+        {
+           $req->validate(
+            [
+                'name' => ['required', new UpperCase],
+                ]
+           ) 
+           return $req->all();
+        }
+    *** Closure method
+    use lluminate\support\Facades\Validate;
+    use Closure;
+    public function addUser(Request $req)
+    {
+        $req->validate([
+            'name' => ['required', function($attribute, $value, $fail) {
+                if ($value == 'admin') {
+                    $fail($attribute, 'The :attribute must not be admin.');
+                    }
+                    }
+                    ]],
+    }
