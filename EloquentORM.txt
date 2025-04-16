@@ -1,0 +1,58 @@
+** ORM =>
+        =>Easy Syntax
+        =>complex relationship between Tables
+            * one to one
+            * one to many
+            * many to many
+            * Observer & scope
+
+*** Syntax=>
+    $users=User::all();
+    User::selectRaw('name,city')->get();
+    User::where('name','John')->get();
+    User::where('name','John')->where('age','>',18)->get()
+    ;
+    (Here User is model name)
+
+    ====>
+        // $users = employe::all();
+        // $users = employe::find([2, 11], ['name', 'email']);
+        // $users = employe::count();
+        // $user = employe::min('id');
+        // $user = employe::where([
+        //     ['name', 'khushi jain']
+        // ])->get();
+    ====>
+
+
+***Important Rule For This
+    * protected $guarderd =[]
+        => use when use object create['']
+        * protected $fillable =[]
+
+
+***UPDATE AND DELETE
+* Method [1]
+    => $user=User::find(2);
+    $user->name='John';
+    $user->save();
+    * Method [2]
+    => User::where('name','John')->update(['name'=>'Johny']);
+    * Method [3]
+    => User::find(2)->update([
+        'name' => 'Johny',
+    ])
+<form action="{{route('user.update',$users->id)}}" method="POST">
+    @csrf
+    @method('PUT')
+
+**DELETE
+* Method [1]
+=> $user=User::find(2);
+$user->delete();
+* Method [2]
+=> User::where('name','John')->delete();
+* Method [3]
+=> User::destroy(1,2,3);
+=>user::truncate();
+****delete route not used in href
