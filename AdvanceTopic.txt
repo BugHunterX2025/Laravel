@@ -1,0 +1,4 @@
+**** Advance ORM
+using this we are use tinkerwell
+**create =>
+    -->firstOrCreate();
