@@ -1,0 +1,39 @@
+                     Laravel : One To One Relationship
+
+                  Students Table                         Contacts Table
++----+-------------+-----+                   +----+-------------+--------+------------+
+| id | Name        | Age |                   | id | Phone       | City   | Student_id |
++----+-------------+-----+                   +----+-------------+--------+------------+
+| 1  | Ram Kumar   | 19  |                   | 1  | 9988441122  | Agra   | 1          |
+| 2  | Salman Khan | 18  |                   | 2  | 8833554477  | Mumbai | 2          |
+| 3  | Meera Khan  | 19  |                   | 3  | 2233665544  | Delhi  | 3          |
+| 4  | Sarita Kumari| 21 |                   | 4  | 1122334455  | Mumbai | 4          |
++----+-------------+-----+                   +----+-------------+--------+------------+
+        ↑                                                 ↑
+        |                                                 |
+        |                                                 |
+  App/Models/Student.php   ---------------------------->  App/Models/Contact.php
+                                (One to One Relationship)
+
+Code in `Student.php`:
+------------------------
+
+1️⃣ public function contact(){
+2️⃣     return $this->hasOne(Contact::class);
+   }
+=>     return $this->hasOne(Contact::class,'foregin_id','localkey');
+
+
+📄 StudentController.php
+
+use App\Models\Student;
+use App\Models\Contact;
+
+class StudentController extends Controller
+{
+    public function show()
+    {
+        $students = Student::with('contact')->get();
+        return $students;
+    }
+}
